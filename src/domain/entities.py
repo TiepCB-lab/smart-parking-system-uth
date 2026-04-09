@@ -1,22 +1,17 @@
-"""Domain entities (skeleton).
+"""Domain entities for parking slot processing."""
 
-TODO:
-- Bổ sung validation cho polygon.
-- Thêm metadata (camera_id, zone_id, ...).
-"""
-
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
-@dataclass
-class ParkingSlot:
+@dataclass(slots=True)
+class Slot:
     slot_id: str
     polygon: list[tuple[int, int]]
     status: str = "unknown"
+    confidence: float = 0.0
 
 
-@dataclass
-class SlotObservation:
-    slot_id: str
-    status: str
-    confidence: float
+@dataclass(slots=True)
+class FrameResult:
+    frame_index: int | None = None
+    slots: list[Slot] = field(default_factory=list)

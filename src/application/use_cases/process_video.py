@@ -1,9 +1,6 @@
-"""Application use-case (skeleton).
+"""Application use-case for a single video frame."""
 
-TODO:
-- Áp dụng rule smoothing theo nhiều frame.
-- Ghi log metric (fps, latency, occupancy rate).
-"""
+from src.domain.entities import FrameResult
 
 
 class ProcessVideoUseCase:
@@ -11,9 +8,8 @@ class ProcessVideoUseCase:
         self.detector = detector
         self.repository = repository
 
-    def run_frame(self, frame):
-        """TODO: read slots -> detect -> update -> persist."""
+    def run_frame(self, frame) -> FrameResult:
         slots = self.repository.get_slots()
-        _ = self.detector.detect(frame, slots)
-        self.repository.save_slots(slots)
-        return slots
+        frame_result = self.detector.detect(frame, slots)
+        self.repository.save_slots(frame_result.slots)
+        return frame_result

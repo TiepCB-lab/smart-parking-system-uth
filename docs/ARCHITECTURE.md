@@ -1,8 +1,8 @@
-# Kiến trúc dự án (skeleton trước, code sau)
+# Kiến trúc dự án
 
 ## Mục tiêu
 - Dựng **khung 3-layer** rõ ràng để nhóm phát triển song song.
-- Chỉ để TODO và stub cơ bản, **chưa triển khai hoàn thiện**.
+- Pipeline CV được tách thành các bước nhỏ trong `src/cv_pipeline`.
 
 ## 3-layer đề xuất
 
@@ -22,6 +22,11 @@
 - OpenCV detector adapter.
 - JSON/DB repository adapter.
 
+## CV Pipeline
+- `preprocessing`: chuyển ảnh sang grayscale và làm mờ.
+- `background_subtraction`: tạo foreground mask và suy luận trạng thái slot.
+- `thresholding`, `morphology`, `contour_detection`, `slot_extraction`, `classifier`: các bước xử lý trung gian.
+
 ## Quy tắc dependency
 - Presentation -> Application -> Domain.
 - Infrastructure implement interface trong Domain.
@@ -30,5 +35,6 @@
 ## Trạng thái hiện tại
 - [x] Tạo cấu trúc thư mục.
 - [x] Tạo file skeleton với TODO.
-- [ ] Chưa hoàn thiện thuật toán detector.
-- [ ] Chưa hoàn thiện repository và UI run loop.
+- [x] Tách pipeline CV thành các module riêng.
+- [x] Nối entrypoint, video reader và JSON repository.
+- [ ] Chưa hoàn thiện thuật toán detector nâng cao và UI overlay.

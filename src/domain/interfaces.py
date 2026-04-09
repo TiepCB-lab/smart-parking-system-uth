@@ -1,27 +1,22 @@
-"""Domain contracts (skeleton).
-
-TODO:
-- Chuẩn hóa kiểu dữ liệu frame.
-- Bổ sung interface event publisher (WebSocket/API).
-"""
+"""Domain contracts for repositories and detectors."""
 
 from abc import ABC, abstractmethod
+from collections.abc import Sequence
+
+from src.domain.entities import FrameResult, Slot
 
 
 class SlotRepository(ABC):
     @abstractmethod
-    def get_slots(self):
-        """TODO: Trả về danh sách slot."""
+    def get_slots(self) -> list[Slot]:
         raise NotImplementedError
 
     @abstractmethod
-    def save_slots(self, slots):
-        """TODO: Lưu trạng thái slot."""
+    def save_slots(self, slots: Sequence[Slot]) -> None:
         raise NotImplementedError
 
 
 class SlotDetector(ABC):
     @abstractmethod
-    def detect(self, frame, slots):
-        """TODO: Trả về observations theo từng slot."""
+    def detect(self, frame, slots: Sequence[Slot]) -> FrameResult:
         raise NotImplementedError
