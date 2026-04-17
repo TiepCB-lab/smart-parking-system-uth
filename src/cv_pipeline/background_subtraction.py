@@ -25,8 +25,8 @@ class BackgroundSubtractionDetector(SlotDetector):
             detectShadows=False,
         )
 
-    def detect(self, frame: np.ndarray, slots: Sequence[Slot]) -> FrameResult:
-        preprocessed_frame = preprocess_frame(frame)
+    def detect(self, frame: np.ndarray, slots: Sequence[Slot], perspective_matrix: np.ndarray | None = None) -> FrameResult:
+        preprocessed_frame = preprocess_frame(frame, perspective_matrix=perspective_matrix)
         foreground_mask = self.background_subtractor.apply(preprocessed_frame)
         binary_mask = apply_threshold(foreground_mask)
         cleaned_mask = clean_mask(binary_mask)
