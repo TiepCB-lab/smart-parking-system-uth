@@ -7,12 +7,12 @@
 
 | Thành viên | Vai trò chính | Ownership module/files chính | Đầu ra chính |
 |---|---|---|---|
-| TV1 | Lead + Integration + Architecture Guard | `src/app/main.py`, `src/application/use_cases/process_video.py`, `src/application/use_cases/process_multi_camera.py`, `src/domain/interfaces.py` | Luồng end-to-end ổn định, tích hợp đa camera, quy trình merge/release |
-| TV2 | Presentation + UX Demo | `src/presentation/video_controller.py`, `src/presentation/multi_camera_controller.py` | Giao diện/chạy demo video và multi-camera rõ ràng, overlay đầy đủ |
-| TV3 | CV Core (Preprocess + Foreground) | `src/cv_pipeline/preprocessing.py`, `src/cv_pipeline/background_subtraction.py`, `src/cv_pipeline/thresholding.py`, `src/cv_pipeline/morphology.py` | Detector baseline sử dụng background subtraction, thông số tối ưu |
-| TV4 | Slot Logic (Contour/ROI/Classifier) | `src/cv_pipeline/contour_detection.py`, `src/cv_pipeline/slot_extraction.py`, `src/cv_pipeline/classifier.py`, `config/slots.example.json` | Trích xuất slot chính xác, phân loại occupied/free/unknown, smoothing |
-| TV5 | Infrastructure + Data + Repository | `src/infrastructure/opencv/video_reader.py`, `src/infrastructure/repositories/json_slot_repository.py`, `data/`, `models/`, `config/slots.example.json` | Adapter đọc video/repository ổn định, bộ dữ liệu/chuẩn hóa config |
-| TV6 | QA + Evaluation + Automation | `src/evaluation/evaluator.py`, test scripts benchmark/end-to-end, regression scenarios | Bộ test tự động, kết quả benchmark, bug reproduction packs |
+| TV1 | Lead + Integration + Architecture Guard | `backend/main.py`, `backend/api/routes.py`, `backend/api/websocket_manager.py` | Luồng end-to-end ổn định, tích hợp đa camera, quy trình merge/release |
+| TV2 | Presentation + UX Demo | `backend/frontend/src/components/VideoManager.vue`, `backend/frontend/src/components/ControlPanel.vue`, `backend/frontend/src/components/BoundingBox.vue` | Giao diện/chạy demo video và multi-camera rõ ràng, overlay đầy đủ |
+| TV3 | CV Core (Preprocess + Foreground) | `backend/core_cv/preprocessing.py`, `backend/core_cv/feature_extraction.py`, `backend/core_cv/pipeline.py`, `backend/core_cv/segmentation.py` | Detector baseline sử dụng background subtraction, thông số tối ưu |
+| TV4 | Slot Logic (Contour/ROI/Classifier) | `models/parking_spots_multi.json`, `models/parking_spots.json`, `backend/core_cv/train_svm.py` | Trích xuất slot chính xác, phân loại occupied/free/unknown, smoothing |
+| TV5 | Infrastructure + Data + Repository | `services/camera_manager.py`, `services/parking_manager.py`, `backend/requirements.txt`, `tests/evaluate_cv.py` | Adapter đọc video/repository ổn định, bộ dữ liệu/chuẩn hóa config |
+| TV6 | QA + Evaluation + Automation | `tests/evaluate_cv.py`, test scripts benchmark/end-to-end, regression scenarios | Bộ test tự động, kết quả benchmark, bug reproduction packs |
 
 ## 2) Bảng nhiệm vụ chi tiết từng thành viên
 

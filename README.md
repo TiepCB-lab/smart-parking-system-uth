@@ -3,47 +3,64 @@ Phát hiện và giám sát trạng thái chỗ đậu xe từ video bằng Pyth
 
 > ⚠️ Hiện tại repository này đang ở mức **khung dự án (skeleton)**: chỉ có cấu trúc + TODO list, chưa triển khai hoàn thiện logic trong bất kỳ module nào.
 
-## 1) Mục tiêu đồ án
-- Xây dựng hệ thống nhận diện chỗ đậu còn trống/đã có xe từ video camera.
-- Hiển thị trạng thái trực quan và có thể mở rộng thành dashboard/API.
-
-## 2) Kiến trúc đề xuất
-Dùng mô hình **3-layer** với trung tâm xử lý ở `cv_pipeline`:
-- `presentation`: nhận input/hiển thị.
-- `application`: use-case điều phối nghiệp vụ.
-- `domain`: entity + interface lõi.
-- `cv_pipeline`: preprocessing, background subtraction, thresholding, morphology, contour, extraction, classifier.
-- `infrastructure`: adapter cho OpenCV, JSON/DB.
-
-Xem chi tiết tại [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
-
-## 3) Cấu trúc thư mục
+## 3) Cấu trúc thư mục mới (2026)
 ```text
-src/
-├── app/
-│   └── main.py
-├── presentation/
-│   └── video_controller.py
-├── application/
-│   └── use_cases/
-│       └── process_video.py
-├── domain/
-│   ├── entities.py
-│   └── interfaces.py
-├── cv_pipeline/
+backend/
+├── extract_frames.py
+├── main.py
+├── requirements.txt
+├── api/
+│   ├── routes.py
+│   └── websocket_manager.py
+├── core_cv/
+│   ├── feature_extraction.py
+│   ├── pipeline.py
 │   ├── preprocessing.py
-│   ├── background_subtraction.py
-│   ├── thresholding.py
-│   ├── morphology.py
-│   ├── contour_detection.py
-│   ├── slot_extraction.py
-│   └── classifier.py
-├── infrastructure/
-│   ├── opencv/
-│   │   └── video_reader.py
-│   └── repositories/
-│       └── json_slot_repository.py
+│   ├── segmentation.py
+│   └── train_svm.py
+└── frontend/
+    └── src/
+        ├── App.vue
+        ├── components/
+        │   ├── BoundingBox.vue
+        │   ├── ControlPanel.vue
+        │   └── VideoManager.vue
+        └── services/
+            └── socketClient.js
+
+models/
+├── parking_spots_multi.json
+└── parking_spots.json
+
+services/
+├── camera_manager.py
+└── parking_manager.py
+
+tests/
+└── evaluate_cv.py
+
 ├── data/
+frontend/
+├── index.html
+├── package.json
+├── README.md
+├── vite.config.js
+├── public/
+├── src/
+│   ├── App.vue
+│   ├── main.js
+│   ├── style.css
+│   ├── assets/
+│   └── components/
+│       ├── BoundingBox.vue
+│       ├── ControlPanel.vue
+│       ├── HelloWorld.vue
+│       └── VideoManager.vue
+│   └── services/
+│       └── socketClient.js
+```
+
+> **Lưu ý:** Tất cả các file `.py` hiện tại chỉ là stub với nội dung `# TODO`, chưa có logic triển khai.
 │   ├── videos/
 │   └── dataset/
 └── models/
